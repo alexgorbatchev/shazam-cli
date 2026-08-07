@@ -39,3 +39,4 @@ Workspace for `shazam-cli` — a Go-based CLI utility (`shazam-cli`) that fetche
 1. **RESILIENT PARSING REQUIREMENT**: Never assume a rigid schema for Shazam's private endpoints. If JSON structure changes, the recursive parser (`types.go:findArrayInMap`) must be maintained to dynamically seek tags/tracks/items arrays in the map.
 2. **SECURE COOKIE HANDLING**: Decrypted cookies must only be kept in-memory and never logged, exported, or persisted to disk. Only the track list meta details may be cached.
 3. **NO BINARIES IN GIT**: Compiled binaries (`shazam-cli`, `shazam-cli.exe`) must always be excluded via `.gitignore`.
+4. **NO TAGS OR RELEASES WITHOUT EXPLICIT USER APPROVAL**: Do NOT create, push, or publish any git tags (e.g. `v0.0.x`) or release workflows until explicitly instructed/requested by the user.
