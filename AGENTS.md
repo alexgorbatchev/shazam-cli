@@ -36,6 +36,6 @@ Workspace for `shazam-cli` — a Go-based CLI utility (`shazam-cli`) that fetche
 - `shazam-cli cache [status|clear]`: View cache statistics or purge the cached library.
 
 ## Mandatory Maintenance Boundaries
-1. **RESIENT PARSING REQUIREMENT**: Never assume a rigid schema for Shazam's private endpoints. If JSON structure changes, the recursive parser (`types.go:findArrayInMap`) must be maintained to dynamically seek tags/tracks/items arrays in the map.
+1. **RESILIENT PARSING REQUIREMENT**: Never assume a rigid schema for Shazam's private endpoints. If JSON structure changes, the recursive parser (`types.go:findArrayInMap`) must be maintained to dynamically seek tags/tracks/items arrays in the map.
 2. **SECURE COOKIE HANDLING**: Decrypted cookies must only be kept in-memory and never logged, exported, or persisted to disk. Only the track list meta details may be cached.
 3. **NO BINARIES IN GIT**: Compiled binaries (`shazam-cli`, `shazam-cli.exe`) must always be excluded via `.gitignore`.
