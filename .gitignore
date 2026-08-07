@@ -1,0 +1,11 @@
+# Binaries
+shazam-cli
+shazam-cli.exe
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Cache / Temp
+.tmp/
+dist/
