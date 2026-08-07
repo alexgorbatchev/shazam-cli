@@ -1,13 +1,14 @@
 package main
 
 import (
-	"context"
 	"encoding/csv"
+	"encoding/json"
 	"fmt"
+	"io"
 	"os"
 	"path/filepath"
+	"strings"
 	"text/tabwriter"
-	"time"
 
 	"github.com/spf13/cobra"
 
