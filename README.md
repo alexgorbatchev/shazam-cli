@@ -105,7 +105,7 @@ shazam-cli list -o query --suffix "Extended Mix"
 
 ### 5. Download Pipeline (Piping into `yt-dlp`)
 
-You can pipe your shazam queries directly into `yt-dlp` to automatically search YouTube, find the best quality tracks/remixes, and download them as high-quality MP3s!
+You can pipe your shazam queries directly into [yt-dlp](https://github.com/yt-dlp/yt-dlp) to automatically search YouTube, find the best quality tracks/remixes, and download them as high-quality MP3s!
 
 ```bash
 # Search and download each track as high-quality MP3 (320kbps equivalent)
