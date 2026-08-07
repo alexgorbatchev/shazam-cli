@@ -9,6 +9,7 @@ import (
 
 	"github.com/browserutils/kooky"
 	"github.com/browserutils/kooky/browser/chrome"
+	"github.com/browserutils/kooky/browser/safari"
 )
 
 // Default paths for Chrome and Vivaldi on different operating systems.
@@ -38,6 +39,8 @@ func ResolveCookieStorePath(browserName, profile string) (string, error) {
 			relPath = filepath.Join(localAppData, "Google", "Chrome", "User Data", profile, "Cookies")
 		} else if browserName == "vivaldi" {
 			relPath = filepath.Join(localAppData, "Vivaldi", "User Data", profile, "Cookies")
+		} else if browserName == "safari" {
+			return "", fmt.Errorf("safari is only supported on macOS (darwin)")
 		} else {
 			return "", fmt.Errorf("unsupported browser for auto-resolution on Windows: %s", browserName)
 		}
@@ -47,6 +50,8 @@ func ResolveCookieStorePath(browserName, profile string) (string, error) {
 			relPath = filepath.Join(home, "Library", "Application Support", "Google", "Chrome", profile, "Cookies")
 		} else if browserName == "vivaldi" {
 			relPath = filepath.Join(home, "Library", "Application Support", "Vivaldi", profile, "Cookies")
+		} else if browserName == "safari" {
+			relPath = filepath.Join(home, "Library", "Containers", "com.apple.Safari", "Data", "Library", "Cookies", "Cookies.binarycookies")
 		} else {
 			return "", fmt.Errorf("unsupported browser for auto-resolution on macOS: %s", browserName)
 		}
@@ -60,6 +65,8 @@ func ResolveCookieStorePath(browserName, profile string) (string, error) {
 			}
 		} else if browserName == "vivaldi" {
 			relPath = filepath.Join(configDir, "vivaldi", profile, "Cookies")
+		} else if browserName == "safari" {
+			return "", fmt.Errorf("safari is only supported on macOS (darwin)")
 		} else {
 			return "", fmt.Errorf("unsupported browser for auto-resolution on Linux: %s", browserName)
 		}
@@ -79,15 +86,25 @@ func GetShazamCookieFromBrowser(browserName, profile string) (string, error) {
 		return "", fmt.Errorf("browser cookies file does not exist at: %s", path)
 	}
 
-	// Since both Chrome and Vivaldi are Chromium-based, they use the same cookie store schema
-	// and system keychain/DPAPI decryption method.
-	cookieStore := chrome.TraverseCookies(path)
-	
 	var shazamCookies []string
-	for cookie := range cookieStore.OnlyCookies() {
-		// Filter for shazam.com
-		if strings.HasSuffix(cookie.Domain, "shazam.com") {
-			shazamCookies = append(shazamCookies, fmt.Sprintf("%s=%s", cookie.Name, cookie.Value))
+	browserName = strings.ToLower(browserName)
+
+	if browserName == "safari" {
+		cookieStore := safari.TraverseCookies(path)
+		for cookie := range cookieStore.OnlyCookies() {
+			if strings.HasSuffix(cookie.Domain, "shazam.com") {
+				shazamCookies = append(shazamCookies, fmt.Sprintf("%s=%s", cookie.Name, cookie.Value))
+			}
+		}
+	} else {
+		// Since both Chrome and Vivaldi are Chromium-based, they use the same cookie store schema
+		// and system keychain/DPAPI decryption method.
+		cookieStore := chrome.TraverseCookies(path)
+		for cookie := range cookieStore.OnlyCookies() {
+			// Filter for shazam.com
+			if strings.HasSuffix(cookie.Domain, "shazam.com") {
+				shazamCookies = append(shazamCookies, fmt.Sprintf("%s=%s", cookie.Name, cookie.Value))
+			}
 		}
 	}
 

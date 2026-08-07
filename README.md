@@ -1,9 +1,9 @@
 # shazam-cli
 
-A Go command line tool to fetch, list, export, and locally cache your Shazam library tracks. It supports manually specifying your session cookie or automatically extracting and decrypting it from your Google Chrome or Vivaldi browser profiles.
+A Go command line tool to fetch, list, export, and locally cache your Shazam library tracks. It supports manually specifying your session cookie or automatically extracting and decrypting it from your Google Chrome, Vivaldi, or Safari browser profiles.
 
 ## Features
-- **Auto Cookie Extraction**: Reads and decrypts `shazam.com` session cookies natively from Google Chrome or Vivaldi profiles on macOS, Windows, and Linux using `kooky`.
+- **Auto Cookie Extraction**: Reads and decrypts `shazam.com` session cookies natively from Google Chrome, Vivaldi, or Safari profiles on macOS, Windows, and Linux using `kooky`.
 - **Offline JSON Cache**: Locally caches retrieved tracks under `~/.cache/shazam-cli/library.json` so that viewing your library is instantaneous and avoids repeated API requests.
 - **Paginated Fetching**: Automatically paginates through your entire Shazam history (no limits).
 - **Flexible Exports**: Export your library to `.csv` or `.json` files.
@@ -44,7 +44,7 @@ go build -o shazam-cli cmd/shazam-cli/main.go
 
 ### 1. Automatic Browser Cookie Retrieval (Recommended)
 
-Make sure you have logged into `shazam.com` in either Google Chrome or Vivaldi. Run:
+Make sure you have logged into `shazam.com` in Google Chrome, Vivaldi, or Safari. Run:
 
 ```bash
 # Auto-extract from Chrome (Default profile)
@@ -52,6 +52,9 @@ shazam-cli list -b chrome
 
 # Auto-extract from Vivaldi
 shazam-cli list -b vivaldi
+
+# Auto-extract from Safari (macOS only)
+shazam-cli list -b safari
 
 # Specify a custom profile
 shazam-cli list -b vivaldi -p "Profile 2"
