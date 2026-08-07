@@ -95,9 +95,27 @@ shazam-cli list -o list
 
 # Print standard CSV to stdout
 shazam-cli list -o csv
+
+# Print raw queries (Artist - Title)
+shazam-cli list -o query
+
+# Print raw queries with a custom DJ suffix
+shazam-cli list -o query --suffix "Extended Mix"
 ```
 
-### 5. Exporting Tracks
+### 5. DJ Download Pipeline (Piping into `yt-dlp`)
+
+As a DJ, you can pipe your shazam queries directly into `yt-dlp` to automatically search YouTube, find the best quality tracks/remixes, and download them as high-quality MP3s!
+
+```bash
+# Search and download each track as high-quality MP3 (320kbps equivalent)
+shazam-cli list -o query | xargs -I {} yt-dlp --extract-audio --audio-format mp3 --audio-quality 0 "ytsearch1:{}"
+
+# Force search for specific DJ mixes or extended versions by adding a suffix
+shazam-cli list -o query --suffix "Extended Mix" | xargs -I {} yt-dlp --extract-audio --audio-format mp3 --audio-quality 0 "ytsearch1:{}"
+```
+
+### 6. Exporting Tracks
 
 Export your Shazam library to a file:
 
@@ -109,7 +127,7 @@ shazam-cli export my_shazams.csv
 shazam-cli export my_shazams.json
 ```
 
-### 6. Cache Management
+### 7. Cache Management
 
 To view stats about your local cache or clear it:
 

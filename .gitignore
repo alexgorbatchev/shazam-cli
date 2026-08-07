@@ -1,6 +1,6 @@
 # Binaries
-shazam-cli
-shazam-cli.exe
+/shazam-cli
+/shazam-cli.exe
 
 # OS files
 .DS_Store
