@@ -121,5 +121,33 @@ shazam-cli cache status
 shazam-cli cache clear
 ```
 
+## Output Examples
+
+### Pretty Table Output (`-o table`, default)
+
+```text
+INDEX   DATE         TITLE                              ARTIST                   SHAZAM URL
+-----   ----         -----                              ------                   ----------
+1       2026-08-07   Around the World                   Daft Punk                https://www.shazam.com/track/549952578
+2       2026-08-06   One More Time                      Daft Punk                https://www.shazam.com/track/549952579
+3       2026-08-05   Harder, Better, Faster, Stronger   Daft Punk                https://www.shazam.com/track/549952580
+```
+
+### Simple List Output (`-o list`)
+
+```text
+[1] Around the World - Daft Punk (2026-08-07)
+[2] One More Time - Daft Punk (2026-08-06)
+[3] Harder, Better, Faster, Stronger - Daft Punk (2026-08-05)
+```
+
+### Standard CSV Output (`-o csv`)
+
+```text
+Index,Date,Title,Artist,URL
+1,2026-08-07 19:26:18,Around the World,Daft Punk,https://www.shazam.com/track/549952578
+2,2026-08-06 15:10:42,One More Time,Daft Punk,https://www.shazam.com/track/549952579
+```
+
 ## License
 MIT
