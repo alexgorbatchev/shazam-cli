@@ -11,11 +11,34 @@ A Go command line tool to fetch, list, export, and locally cache your Shazam lib
 
 ## Installation
 
-Ensure you have Go installed (version 1.26.5 or later is recommended). Clone the repository and build:
+### 1. Download Pre-compiled Binary (Recommended)
+
+Download the latest release binary for your operating system and architecture directly from the [GitHub Releases](https://github.com/alexgorbatchev/shazam-cli/releases) page, or download it via the GitHub CLI (`gh`):
 
 ```bash
+# Example: Download macOS Apple Silicon (Arm64) binary
+gh release download --repo alexgorbatchev/shazam-cli --pattern "*Darwin_arm64.tar.gz"
+tar -xzf shazam-cli_*_Darwin_arm64.tar.gz
+mv shazam-cli /usr/local/bin/
+```
+
+### 2. Install from Source (Go Developers)
+
+If you have Go installed (version 1.26.5 or later), you can build the utility manually:
+
+```bash
+go install github.com/alexgorbatchev/shazam-cli/cmd/shazam-cli@latest
+```
+
+Or clone and build:
+
+```bash
+git clone https://github.com/alexgorbatchev/shazam-cli.git
+cd shazam-cli
 go build -o shazam-cli cmd/shazam-cli/main.go
 ```
+
+---
 
 ## Usage
 
@@ -25,13 +48,13 @@ Make sure you have logged into `shazam.com` in either Google Chrome or Vivaldi. 
 
 ```bash
 # Auto-extract from Chrome (Default profile)
-./shazam-cli list -b chrome
+shazam-cli list -b chrome
 
 # Auto-extract from Vivaldi
-./shazam-cli list -b vivaldi
+shazam-cli list -b vivaldi
 
 # Specify a custom profile
-./shazam-cli list -b vivaldi -p "Profile 2"
+shazam-cli list -b vivaldi -p "Profile 2"
 ```
 
 ### 2. Manual Cookie Passing
@@ -40,11 +63,11 @@ If auto-extraction isn't supported on your platform/browser, log into `shazam.co
 
 ```bash
 # Via CLI flag
-./shazam-cli list -c "ini=...; token=...; shazam_session=..."
+shazam-cli list -c "ini=...; token=...; shazam_session=..."
 
 # Via Environment Variable
 export SHAZAM_COOKIE="ini=...; token=..."
-./shazam-cli list
+shazam-cli
 ```
 
 ### 3. Displaying and Offline Caching
@@ -53,10 +76,10 @@ Once fetched, tracks are saved locally in your user cache folder. Subsequent cal
 
 ```bash
 # Loads instantaneously from local cache!
-./shazam-cli list
+shazam-cli list
 
 # Force reload from Shazam API
-./shazam-cli list --no-cache
+shazam-cli list --no-cache
 ```
 
 ### 4. Custom Output Formats
@@ -65,13 +88,13 @@ Toggle output styles via `-o` or `--output`:
 
 ```bash
 # Pretty text table (default)
-./shazam-cli list -o table
+shazam-cli list -o table
 
 # Simple list (ideal for piping)
-./shazam-cli list -o list
+shazam-cli list -o list
 
 # Print standard CSV to stdout
-./shazam-cli list -o csv
+shazam-cli list -o csv
 ```
 
 ### 5. Exporting Tracks
@@ -80,10 +103,10 @@ Export your Shazam library to a file:
 
 ```bash
 # Export to CSV (with headers)
-./shazam-cli export my_shazams.csv
+shazam-cli export my_shazams.csv
 
 # Export to pretty-printed JSON
-./shazam-cli export my_shazams.json
+shazam-cli export my_shazams.json
 ```
 
 ### 6. Cache Management
@@ -92,10 +115,10 @@ To view stats about your local cache or clear it:
 
 ```bash
 # Check cache statistics
-./shazam-cli cache status
+shazam-cli cache status
 
 # Clear the cached library
-./shazam-cli cache clear
+shazam-cli cache clear
 ```
 
 ## License
