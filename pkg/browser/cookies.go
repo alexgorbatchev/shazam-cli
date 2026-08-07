@@ -125,7 +125,15 @@ func GetShazamCookieAuto() (string, error) {
 	).OnlyCookies()
 
 	var shazamCookies []string
+	seenNames := make(map[string]bool)
 	for cookie := range cookiesSeq {
+		// Because TraverseCookies scans multiple files/profiles sequentially, if we
+		// encounter a cookie name we have already seen, it belongs to a different session.
+		// We ignore duplicates to lock onto the first complete, unified session.
+		if seenNames[cookie.Name] {
+			continue
+		}
+		seenNames[cookie.Name] = true
 		shazamCookies = append(shazamCookies, fmt.Sprintf("%s=%s", cookie.Name, cookie.Value))
 	}
 
