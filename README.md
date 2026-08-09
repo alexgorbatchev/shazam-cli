@@ -1,3 +1,15 @@
+# ⚠️ [ARCHIVED] Apple Completely Ruined This Project ⚠️
+
+**This repository is officially archived because Apple, in their infinite corporate "wisdom," decided to completely destroy the desktop login flow on shazam.com.**
+
+By completely removing the "My Shazam" and sign-in buttons from the desktop web interface and forcing aggressive NextJS 404 redirects on `/myshazam` to promote their mobile apps and Chrome extensions, Apple has turned a simple web-login experience into an absolute UX garbage fire. 
+
+While the tool is technically complete and beautifully written—featuring native macOS/Linux/Windows cookie decryption, offline caching, and streamlined download pipelines—user session siphoning is now functionally dead for average desktop users who don't feel like tricking user-agents inside developer tools mobile emulators just to log in.
+
+Thanks for nuking the front door of your own website, Apple. Great job. 🙄
+
+---
+
 # shazam-cli
 
 A Go command line tool to fetch, list, export, and locally cache your Shazam library tracks. It supports manually specifying your session cookie or automatically extracting and decrypting it from your Google Chrome, Vivaldi, or Safari browser profiles.

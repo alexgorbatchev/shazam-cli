@@ -1,4 +1,6 @@
-# shazam-cli Agent Guidelines
+# shazam-cli Agent Guidelines [ARCHIVED]
+
+**Status: Archived (Apple removed the desktop login flow from shazam.com, making desktop session cookie extraction unviable for general users).**
 
 Workspace for `shazam-cli` — a Go-based CLI utility (`shazam-cli`) that fetches, displays, exports, and locally caches your Shazam library tracks. It supports manual session cookies or auto-extracting and decrypting cookies natively from local browser profiles (Chrome/Vivaldi/Safari).
 
