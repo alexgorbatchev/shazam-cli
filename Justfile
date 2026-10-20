@@ -4,8 +4,12 @@ build:
 
 # Run development version
 run *args:
-    go run cmd/shazam-cli/main.go {{args}}
+    go run cmd/shazam-cli/main.go {{ args }}
 
 # Tidy dependencies
 tidy:
     go mod tidy
+
+# Download project dependencies for local development
+setup:
+    go mod download
